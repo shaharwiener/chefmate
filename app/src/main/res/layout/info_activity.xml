@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoActivity">
+
+    <LinearLayout
+        android:id="@+id/explainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comic_medium"
+            android:text="ברוכים הבאים ל-ChefMate!"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="האפליקציה שתעזור לכם למצוא מתכונים בקלות ובהתאמה אישית, בהתאם למרכיבים שכבר יש לכם בבית. \n
+רק תזינו את מספר הסועדים, הזמן שיש לכם לבישול, ורשימת מצרכים – ו-ChefMate תציע לכם מתכונים טעימים ופשוטים להכנה.\n תוכלו לשמור את המתכונים האהובים עליכם, לשתף אותם עם חברים, ואף ליצור ארוחה שלמה ממספר מתכונים. ChefMate כאן כדי להפוך את חוויית הבישול למהירה, מהנה ומותאמת אישית עבורכם!"
+            android:maxLines="10"
+            android:scrollHorizontally="false"
+            android:ellipsize="end"
+            android:padding="8dp"
+            android:lineSpacingExtra="8dp"
+            android:textSize="15dp"/>
+
+        <ImageView
+            android:id="@+id/infoImage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ofir" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".HomeActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layoutDirection="rtl">
+
+        <LinearLayout
+            android:id="@+id/explainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/rounded_line"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/explainTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:gravity="center"
+                    android:text="הסבר על Chef Mate"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <ImageView
+                    android:id="@+id/infoImage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/information_icon" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/rounded_line"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toEndOf="@id/content_frame"
+                app:layout_constraintBottom_toTopOf="@id/menu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/editTextContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/explainLayout">
+
+
+            <LinearLayout
+                android:id="@+id/dinersLayout"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/dinersText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:gravity="center"
+                    android:text="מספר סועדים"
+                    android:textColor="#C45702"
+                    android:textSize="20dp"
+                    android:layout_marginBottom="3dp"/>
+
+                <EditText
+                    android:id="@+id/editDiners"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="5"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textSize="17dp"
+                    android:layout_below="@id/header_layout" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/timeLayout"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/timeText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="זמן הכנה (דקות)"
+                    android:textColor="#C45702"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="3dp"/>
+
+                <EditText
+                    android:id="@+id/editTime"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="30"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:textSize="17dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- Groceries Label and Input Container -->
+        <LinearLayout
+            android:id="@+id/groceryInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextContainer">
+
+
+            <TextView
+                android:id="@+id/groceriesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comic_medium"
+                android:gravity="start"
+                android:text="מצרכים:"
+                android:textColor="#C45702"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/groceryInput"
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/comic_medium"
+                android:hint="הוסף מצרך"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"/>
+
+
+            <ImageButton
+                android:id="@+id/addButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/addicon" />
+        </LinearLayout>
+
+            <!-- Dynamic List of Groceries Container -->
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/groceryListContainer"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:minHeight="200dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/border"
+                android:padding="20dp"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/groceryInputLayout"/>
+
+        <Button
+            android:id="@+id/findRecipesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#004C69"
+            android:fontFamily="@font/comic_medium"
+            android:gravity="center"
+            android:text="מצא לי מתכונים"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/groceryListContainer" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

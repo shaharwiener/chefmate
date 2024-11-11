@@ -1,0 +1,178 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    tools:context=".RecipeActivity">
+
+    <ScrollView
+        android:id="@+id/mainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="80dp">
+            <LinearLayout
+                android:id="@+id/social"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/white"
+                    android:baselineAlignBottom="true"
+                    android:contentDescription="Share"
+                    app:flow_horizontalAlign="start"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="?attr/actionModeShareDrawable" />
+
+
+                <ImageButton
+                    android:id="@+id/favoriteButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="9dp"
+                    android:contentDescription="Save"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/favorite_icons_v2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dinersLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="17dp"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/dinersTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_bold"
+                    android:text="מספר סועדים:"
+                    android:textSize="24sp"
+                    android:textColor="#C45702"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/social" />
+
+                <TextView
+                    android:id="@+id/dinersNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="5"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="5dp"
+                    app:layout_constraintStart_toEndOf="@id/dinersTitle"
+                    app:layout_constraintTop_toTopOf="@id/dinersTitle" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/timeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/makeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_bold"
+                    android:text="זמן הכנה:"
+                    android:textSize="24sp"
+                    android:textColor="#C45702"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dinersTitle" />
+
+                <TextView
+                    android:id="@+id/makeTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="40 דקות"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="5dp"
+                    app:layout_constraintStart_toEndOf="@id/makeTitle"
+                    app:layout_constraintTop_toTopOf="@id/makeTitle" />
+            </LinearLayout>
+
+
+
+
+            <!-- Ingredients Title -->
+            <TextView
+                android:id="@+id/ingredientsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/comic_bold"
+                android:text="מצרכים:"
+                android:textSize="24sp"
+                android:textColor="#C45702"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/makeTitle" />
+
+            <!-- Ingredients List -->
+            <TextView
+                android:id="@+id/ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/comic_medium"
+                android:lines="5"
+                android:maxLines="10"
+                android:layout_marginTop="4dp"
+                android:text="• 1 חבילת פסטה - 500 גרם\n• 3 עגבניות \n• קורט מלח\n• חבילת רוטב עגבניות\n• כף אבקת מרק"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ingredientsTitle" />
+
+            <TextView
+                android:id="@+id/instructionsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/comic_bold"
+                android:text="הוראות הכנה:"
+                android:textSize="24sp"
+                android:textColor="#C45702"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ingredients" />
+
+
+            <TextView
+                android:id="@+id/instructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/comic_medium"
+                android:text="1. מכינים את הפסטה לפי הוראות ההכנה\n2. מערבבים את העגבניות עם הרוטב על אש גבוהה \n3. לאחר 10 דק ממניכים את האש ומוסיפים את אבקת המרק והמלח לפי הטעם\n4. מבשלים למשך 20 דקות\n5. כאשר הטעם טוב וטעים מורידים מהאש ומצננים לפני הגשה"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/instructionsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
