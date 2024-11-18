@@ -1,0 +1,7 @@
+<resources>
+    <style name="MenuStyle">
+        <item name="android:background">#FFBB86FC</item>
+        <item name="android:padding">8dp</item>
+    </style>
+</resources>
+

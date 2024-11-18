@@ -51,7 +51,7 @@
                     android:contentDescription="Save"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/favorite_icons_v2" />
+                    app:srcCompat="@drawable/favorite_icon" />
             </LinearLayout>
 
             <LinearLayout

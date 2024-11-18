@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.chefmate.BaseActivity;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +21,7 @@ import okhttp3.Response;
 
 public abstract class OpenAiService extends BaseActivity {
     final String url = "https://api.openai.com/v1/chat/completions";
-    final String apiKey = <Add here your API KEY from OpenAI>;
+    final String apiKey = "<Add here your API key>";
 
     public void callOpenAI(String prompt){
         // OpenAI API endpoint and key
@@ -68,6 +70,8 @@ public abstract class OpenAiService extends BaseActivity {
                     } else {
                         Log.e("OpenAI Error", "Request failed: " + response.code() + " " + response.message() + " " + response.networkResponse().message());
                     }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 } finally {
                     response.close();
                 }
@@ -75,5 +79,5 @@ public abstract class OpenAiService extends BaseActivity {
         });
     }
 
-    protected abstract void handleOpenAiResponse(String response);
+    protected abstract void handleOpenAiResponse(String response) throws JSONException;
 }

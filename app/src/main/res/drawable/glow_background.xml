@@ -1,0 +1,21 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Glow Effect -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="40dp"
+                android:centerColor="#80FFD700"
+            android:endColor="@android:color/transparent"
+            android:centerX="50%"
+            android:centerY="50%" />
+        </shape>
+    </item>
+
+    <!-- Background Circle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+</layer-list>

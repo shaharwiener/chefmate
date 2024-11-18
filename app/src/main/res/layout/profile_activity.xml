@@ -6,84 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
-    <include
-        android:id="@+id/activity_base"
-        layout="@layout/base_activity"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-121dp" />
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/profileId"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/comic_bold"
-        android:text="פרופיל משתמש"
-        android:textColor="@color/material_dynamic_primary60"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.903"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layoutDirection="rtl"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/profile_icon" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273"
-        app:srcCompat="@drawable/profilepic" />
+        <LinearLayout
+            android:id="@+id/nameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileImage">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="140dp"
-        android:layout_height="29dp"
-        android:fontFamily="@font/comic_bold"
-        android:text="שם משתמש"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_base"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.797"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/nameLabel"
+                android:layout_width="140dp"
+                android:layout_height="29dp"
+                android:fontFamily="@font/comic_bold"
+                android:text="שם משתמש"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.797"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="302dp"
-        android:layout_height="53dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:fontFamily="@font/comic_medium"
-        android:hint="הכנס שם חדש"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_base"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="302dp"
+                android:layout_height="53dp"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:fontFamily="@font/comic_medium"
+                android:hint="הכנס שם חדש"
+                android:inputType="number"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.575" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="112dp"
-        android:layout_height="58dp"
-        android:backgroundTint="#004C69"
-        android:fontFamily="@font/comic_medium"
-        android:text="שמור"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_base"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682" />
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="112dp"
+            android:layout_height="58dp"
+            android:backgroundTint="#004C69"
+            android:fontFamily="@font/comic_medium"
+            android:text="שמור"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameLayout" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

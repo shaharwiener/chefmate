@@ -14,7 +14,11 @@ import android.widget.Toast;
 import com.chefmate.ai.OpenAiJsonService;
 import com.chefmate.ai.OpenAiService;
 import com.chefmate.ai.RecipePrompts;
+import com.chefmate.menu.BottomNavigationViewHandler;
+import com.chefmate.model.CookTime;
+import com.chefmate.model.Recipe;
 import com.chefmate.model.RecipeRequest;
+import com.chefmate.spinner.SpinnerItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +34,7 @@ public class RecipeActivity extends OpenAiService {
 
     private String title;
     private RecipeRequest recipeRequest;
+    private Recipe recipe;
     private String instructions;
 
     @Override
@@ -41,6 +46,7 @@ public class RecipeActivity extends OpenAiService {
         super.setContentLayout(R.layout.recipe_activity, title);
 
         super.show(false);
+        BottomNavigationViewHandler.clearMenu(this);
 
         dinersTextView = findViewById(R.id.dinersNum);
         timeTextView = findViewById(R.id.makeTime);
@@ -70,9 +76,9 @@ public class RecipeActivity extends OpenAiService {
     private void setupRecipeUI(){
         // Populate the TextViews with recipe details
 
-        dinersTextView.setText(String.valueOf(this.recipeRequest.getDiners()));
-        timeTextView.setText(String.valueOf(this.recipeRequest.getTime()) + " דקות");
-        groceriesTextView.setText(this.recipeRequest.getGroceries());
+        dinersTextView.setText(String.valueOf(this.recipe.getDiners()));
+        timeTextView.setText(String.valueOf(this.recipe.getActualCookingTime()) + " דקות");
+        groceriesTextView.setText(this.recipe.getGroceries());
         instructionsTextView.setText(this.instructions);
 
         super.show(true);
@@ -99,7 +105,7 @@ public class RecipeActivity extends OpenAiService {
     }
 
 
-    private void fetchFullRecipe(String recipeTitle, int diners, int time, String groceries) {
+    private void fetchFullRecipe(String recipeTitle, int diners, CookTime time, String groceries) {
         String prompt = RecipePrompts.createGetRecipePrompt(recipeTitle, diners, time, groceries);
         callOpenAI(prompt);
     }
@@ -117,8 +123,7 @@ public class RecipeActivity extends OpenAiService {
                 ingredients.append("• ").append(ingredient).append("\n");
             }
 
-            this.recipeRequest = new RecipeRequest(null, this.recipeRequest.getDiners(), this.recipeRequest.getTime(), ingredients.toString());
-
+//            this.recipeRequest = new RecipeRequest(null, this.recipeRequest.getDiners(), this.recipeRequest.getMealType(), this.recipeRequest.getTime(), ingredients.toString());
             JSONArray instructions = recipeJson.getJSONArray("instructions");
             StringBuilder instructionsBuffer = new StringBuilder();
             for (int i = 0; i < instructions.length(); i++) {
@@ -127,6 +132,11 @@ public class RecipeActivity extends OpenAiService {
             }
 
             this.instructions = instructionsBuffer.toString();
+            int time = recipeJson.getInt("time");
+
+            this.recipe = new Recipe(title, this.recipeRequest.getDiners(), this.recipeRequest.getMealType(), this.recipeRequest.getTime(), ingredients.toString(), this.instructions);
+            this.recipe.setActualCookingTime(time);
+
             System.out.println("instructions: "+ instructions);
             // Update the UI on the main thread
             runOnUiThread(this::setupRecipeUI);

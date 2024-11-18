@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.google.code.gson:gson:2.8.8")

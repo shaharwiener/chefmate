@@ -56,7 +56,7 @@
                     android:layout_height="30dp"
                     android:scaleType="fitCenter"
                     android:background="@android:color/transparent"
-                    app:srcCompat="@drawable/information_icon" />
+                    app:srcCompat="@drawable/info_icon" />
             </LinearLayout>
 
             <View
@@ -65,49 +65,101 @@
                 android:background="@drawable/rounded_line"
                 android:layout_marginTop="10dp"
                 app:layout_constraintStart_toEndOf="@id/content_frame"
-                app:layout_constraintBottom_toTopOf="@id/menu"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/comic_medium"
+            android:gravity="center"
+            android:textColor="#FF0000"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/explainLayout"/>
 
         <LinearLayout
-            android:id="@+id/editTextContainer"
-            android:layout_width="wrap_content"
+            android:id="@+id/inputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/explainLayout">
-
+            app:layout_constraintTop_toBottomOf="@+id/errorMessage">
 
             <LinearLayout
-                android:id="@+id/dinersLayout"
-                android:layout_width="150dp"
+                android:id="@+id/typeLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layoutDirection="rtl"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/dinersText"
-                    android:layout_width="match_parent"
+                    android:id="@+id/typeTitle"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comic_medium"
-                    android:gravity="center"
+                    android:text="סוג ארוחה"
+                    android:textColor="#C45702"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="3dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+                <Spinner
+                    android:id="@+id/typeInput"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/spinner_background"
+                    android:popupBackground="@drawable/spinner_background"
+                    android:fontFamily="@font/comic_medium"
+                    android:text="5"
+                    android:textColor="#000000"
+                    android:textColorHint="#000000"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textSize="17dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dinersLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layoutDirection="rtl"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/dinersTitle"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
                     android:text="מספר סועדים"
                     android:textColor="#C45702"
                     android:textSize="20dp"
-                    android:layout_marginBottom="3dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="3dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <EditText
-                    android:id="@+id/editDiners"
-                    android:layout_width="100dp"
+                    android:id="@+id/dinersInput"
+                    android:layout_width="150dp"
                     android:layout_height="40dp"
-                    android:layout_weight="1"
                     android:background="@drawable/border"
                     android:fontFamily="@font/comic_medium"
                     android:text="5"
@@ -115,96 +167,94 @@
                     android:textColorHint="#000000"
                     android:inputType="number"
                     android:textAlignment="center"
-                    android:textSize="17dp"
-                    android:layout_below="@id/header_layout" />
+                    android:textSize="17dp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/timeLayout"
-                android:layout_width="150dp"
+                android:id="@+id/cookTimeLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
+                android:orientation="horizontal"
+                android:gravity="right"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/timeText"
-                    android:layout_width="match_parent"
+                    android:id="@+id/cookTimeTitle"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comic_medium"
                     android:text="זמן הכנה (דקות)"
                     android:textColor="#C45702"
                     android:textSize="20dp"
-                    android:gravity="center"
+                    android:gravity="right"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="3dp"/>
 
-                <EditText
-                    android:id="@+id/editTime"
-                    android:layout_width="100dp"
+                <Spinner
+                    android:id="@+id/cookTimeInput"
+                    android:layout_width="150dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/spinner_background"
+                    android:popupBackground="@drawable/spinner_background"
                     android:fontFamily="@font/comic_medium"
-                    android:text="30"
-                    android:inputType="number"
-                    android:textAlignment="center"
+                    android:text="5"
                     android:textColor="#000000"
                     android:textColorHint="#000000"
+                    android:inputType="number"
+                    android:textAlignment="center"
                     android:textSize="17dp" />
+
+
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-        <!-- Groceries Label and Input Container -->
-        <LinearLayout
-            android:id="@+id/groceryInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextContainer">
-
-
-            <TextView
-                android:id="@+id/groceriesText"
-                android:layout_width="wrap_content"
+            <!-- Groceries Label and Input Container -->
+            <LinearLayout
+                android:id="@+id/groceryInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/comic_medium"
-                android:gravity="start"
-                android:text="מצרכים:"
-                android:textColor="#C45702"
-                android:textSize="20dp" />
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-            <EditText
-                android:id="@+id/groceryInput"
-                android:layout_width="40dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/comic_medium"
-                android:hint="הוסף מצרך"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/groceriesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/comic_medium"
+                    android:gravity="start"
+                    android:text="מצרכים:"
+                    android:textColor="#C45702"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/groceryInput"
+                    android:layout_width="40dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/comic_medium"
+                    android:hint="הוסף מצרך"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"/>
 
 
-            <ImageButton
-                android:id="@+id/addButton"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/addicon" />
-        </LinearLayout>
+                <ImageButton
+                    android:id="@+id/addButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitCenter"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/add_icon" />
+            </LinearLayout>
 
             <!-- Dynamic List of Groceries Container -->
             <com.google.android.flexbox.FlexboxLayout
@@ -223,22 +273,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/groceryInputLayout"/>
 
-        <Button
-            android:id="@+id/findRecipesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="#004C69"
-            android:fontFamily="@font/comic_medium"
-            android:gravity="center"
-            android:text="מצא לי מתכונים"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/groceryListContainer" />
-
-
+            <Button
+                android:id="@+id/findRecipesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#004C69"
+                android:fontFamily="@font/comic_medium"
+                android:gravity="center"
+                android:text="מצא לי מתכונים"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/groceryListContainer" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

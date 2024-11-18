@@ -11,8 +11,11 @@ import android.widget.TextView;
 import com.chefmate.ai.OpenAiJsonService;
 import com.chefmate.ai.OpenAiService;
 import com.chefmate.ai.RecipePrompts;
+import com.chefmate.menu.BottomNavigationViewHandler;
+import com.chefmate.model.CookTime;
 import com.chefmate.model.RecipeRequest;
 import com.chefmate.speech.SpeechService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +41,7 @@ public class RecipeOptionsActivity extends OpenAiService {
         super.setContentLayout(R.layout.recipe_options_activity, "בחר מתכון");
         this.speechService = new SpeechService(this);
         this.recipeRequest = (RecipeRequest)getIntent().getSerializableExtra("recipeRequest");
+        BottomNavigationViewHandler.clearMenu(this);
 
         requestRecipeTitles(this.recipeRequest.getDiners(), this.recipeRequest.getTime(), this.recipeRequest.getGroceries(), null);
 
@@ -71,7 +75,7 @@ public class RecipeOptionsActivity extends OpenAiService {
         }
     }
 
-    private void requestRecipeTitles(int diners, int time, String groceries, ArrayList<String> options) {
+    private void requestRecipeTitles(int diners, CookTime time, String groceries, ArrayList<String> options) {
         String prompt = RecipePrompts.createGetRecipeOptionsPrompt(diners, time, groceries, options);
         callOpenAI(prompt);
     }

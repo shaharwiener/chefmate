@@ -1,19 +1,32 @@
 package com.chefmate.ai;
 
+import com.chefmate.model.CookTime;
+import com.chefmate.model.MealType;
+import com.chefmate.spinner.SpinnerItem;
+
 import java.util.ArrayList;
 
 public class RecipePrompts {
 
+    public static String createValidationGroceriesForMealTypePrompt(MealType mealType, String groceries){
 
-    public static String createGetRecipeOptionsPrompt(int diners, int time, String groceries, ArrayList<String> options) {
-        String prompt =  "Suggest four options of recipes based on the following details: " +
+        String prompt = "Is it valid to cook the meal type with the Hebrew name '" + mealType.getValue() +
+                "' using the following groceries in Hebrew: " + groceries +
+                "? Please return whether it is valid or not (boolean value true or false in English). If it is not valid, provide the reason in Hebrew. " +
+                "Return the answer in JSON format: {'valid': '', 'reason': ''}";
+
+        return prompt;
+    }
+
+    public static String createGetRecipeOptionsPrompt(int diners, CookTime time, String groceries, ArrayList<String> options) {
+        String prompt = "Please suggest four recipe options based on the following details: " +
                 "Groceries: " + groceries +
-                " and cooking time is up to " + time + " minutes," +
-                " and number of diners is ." + diners +
-                " The groceries input will be in Hebrew " +
-                " and the output should be the titles of the four options in Hebrew. Only the values without keys." +
-                " Respond in JSON format with each recipe as a separate element, like this:" +
+                ", cooking time between " + time.getMinTime() + " and " + time.getMaxTime() + " minutes, " +
+                "for " + diners + " diners. The groceries are provided in Hebrew, " +
+                "and the output should include only the titles of the four recipe options in Hebrew. " +
+                "Respond in JSON format as an array of titles, like this: " +
                 "{['Recipe Title 1', 'Recipe Title 2', 'Recipe Title 3', 'Recipe Title 4']}";
+
 
         if(options != null && !options.isEmpty()){
             prompt += " please provide options that are different than ";
@@ -25,15 +38,17 @@ public class RecipePrompts {
     }
 
 
-    public static String createGetRecipePrompt(String title, int diners, int time, String groceries) {
-        String prompt = "Create a recipe with the Hebrew name '" + title + "' based on the following details: " +
-                "The only groceries to be used are: " + groceries + " and cooking time is up to " + time + " minutes, " +
-                "and number of diners is " + diners + ". The groceries input will be in Hebrew, and the output values should also be in Hebrew, " +
-                "but the JSON keys should remain in English. " +
-                "Each grocery item should be a single string that includes both the name and the amount needed for the given diners. " +
-                "In the groceries and instructions please do not use special symbols that break the json. " +
-                "Please provide a JSON response with the following fields: " +
+    public static String createGetRecipePrompt(String title, int diners, CookTime time, String groceries) {
+        String prompt = "Create a recipe with the Hebrew title '" + title + "' using the following details: " +
+                "Allowed groceries: " + groceries + ", with a cooking time between " + time.getMinTime() + " and " + time.getMaxTime() + " minutes, " +
+                "for " + diners + " diners. The groceries are provided in Hebrew, and the output values should also be in Hebrew, " +
+                "but keep the JSON keys in English. " +
+                "Each grocery item should be a single string containing both the name and the required amount for the given diners. " +
+                "Avoid using any special characters in the groceries or instructions that could break the JSON format. " +
+                " the time should be a number of minutes for making the entire recipe. " +
+                "Please return a JSON response with the following structure: " +
                 "{'title': '', 'diners': '', 'groceries': [], 'time': '', 'instructions': []}";
+
         return prompt;
     }
 
