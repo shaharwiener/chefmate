@@ -1,7 +1,5 @@
 package com.chefmate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class FavoriteActivity extends BaseActivity {
@@ -10,6 +8,6 @@ public class FavoriteActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.favorite_activity, "מתכונים מועדפים");
-        super.show(true);
+        super.showPageLayout(true);
     }
 }

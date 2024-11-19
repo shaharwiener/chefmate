@@ -1,5 +1,6 @@
 package com.chefmate.ai;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.chefmate.BaseActivity;
@@ -21,7 +22,8 @@ import okhttp3.Response;
 
 public abstract class OpenAiService extends BaseActivity {
     final String url = "https://api.openai.com/v1/chat/completions";
-    final String apiKey = "<Add here your API key>";
+    final String apiKey = "<Add here your API Keys>";
+
 
     public void callOpenAI(String prompt){
         // OpenAI API endpoint and key

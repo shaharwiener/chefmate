@@ -1,7 +1,5 @@
 package com.chefmate;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 public class InfoActivity extends BaseActivity {
@@ -10,8 +8,8 @@ public class InfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.info_activity, "");
-        super.show(false);
+        super.showPageLayout(false);
 
-        super.show(true);
+        super.showPageLayout(true);
     }
 }

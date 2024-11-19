@@ -16,4 +16,9 @@
         android:id="@+id/action_profile"
         android:title="איזור אישי"
         android:icon="@drawable/profile_icon" />
+
+    <item
+        android:id="@+id/action_info"
+        android:title="הסבר"
+        android:icon="@drawable/info_icon" />
 </menu>

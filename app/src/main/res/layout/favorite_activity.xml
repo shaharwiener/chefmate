@@ -4,7 +4,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="rtl"
     tools:context=".FavoriteActivity">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/groceryListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:minHeight="200dp"
+        android:padding="20dp"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/favorite_border"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="פסטה ברוטב שמנת"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/pasta"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center_vertical">
+                <ImageButton
+                    android:id="@+id/deleteButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@android:drawable/ic_menu_delete"
+                    android:background="@android:color/transparent" />
+
+                <ImageButton
+                    android:id="@+id/shareButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@android:drawable/ic_menu_share"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/favorite_border"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="עוף צלוי עם תפוחי אדמה"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/chicken"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center_vertical">
+                <ImageButton
+                    android:id="@+id/deleteButton2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@android:drawable/ic_menu_delete"
+                    android:background="@android:color/transparent" />
+
+                <ImageButton
+                    android:id="@+id/shareButton2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@android:drawable/ic_menu_share"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.flexbox.FlexboxLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,69 +1,70 @@
 package com.chefmate;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ActionMenuItemView;
-import androidx.appcompat.view.menu.MenuItemImpl;
-import androidx.appcompat.widget.ActionMenuView;
-import androidx.appcompat.widget.Toolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class BaseActivity extends AppCompatActivity {
 
     private RelativeLayout loadingOverlay;
-    private FrameLayout mainContent;
-    private LinearLayout headerLayout;
-    private int currentFrameLayout;
+    private static int currentMenuItemId;
+    private ScrollView scrollArea;
+    private LinearLayout menuView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_activity);
-        this.loadingOverlay = findViewById(R.id.loadingOverlay);
-        this.mainContent = findViewById(R.id.content_frame);
-        this.headerLayout = findViewById(R.id.header_layout);
 
+        // Store the views for visible and invisible when loading
+        this.scrollArea = findViewById(R.id.scroll_area);
+        this.menuView = findViewById(R.id.menu_view);
+        this.loadingOverlay = findViewById(R.id.loading_view);
+
+        // Setup of menu and defines the actions on selected items
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setItemIconTintList(null);
+        // Temporarily disable the listener to prevent double-triggering
+        bottomNavigationView.setOnNavigationItemSelectedListener(null);
+        bottomNavigationView.setSelectedItemId(this.currentMenuItemId);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             Intent intent=null;
             int id = item.getItemId();
             if (id == R.id.action_home) {
-                if (currentFrameLayout == R.layout.home_activity)
+                if (currentMenuItemId == R.layout.home_activity)
                     return true;
+                currentMenuItemId = R.id.action_home;
                 intent = new Intent(this, HomeActivity.class);
             } else if (id == R.id.action_favorites) {
-                if (currentFrameLayout == R.layout.favorite_activity)
+                if (currentMenuItemId == R.layout.favorite_activity)
                     return true;
+                currentMenuItemId = R.id.action_favorites;
                 intent = new Intent(this, FavoriteActivity.class);
             } else if (id == R.id.action_profile) {
-                if (currentFrameLayout == R.layout.profile_activity)
+                if (currentMenuItemId == R.layout.profile_activity)
                     return true;
+                currentMenuItemId = R.id.action_profile;
                 intent = new Intent(this, ProfileActivity.class);
+            } else if (id == R.id.action_info){
+                if (currentMenuItemId == R.layout.info_activity)
+                    return true;
+                currentMenuItemId = R.id.action_info;
+                intent = new Intent(this, InfoActivity.class);
             }
 
             if(intent != null){
@@ -80,23 +81,23 @@ public class BaseActivity extends AppCompatActivity {
 
     // Method to set the content of the FrameLayout
     protected void setContentLayout(int layoutResID, String title) {
-        TextView titleText = findViewById(R.id.titleText);
+        TextView titleText = findViewById(R.id.page_title);
         titleText.setText(title);
-        FrameLayout contentFrame = findViewById(R.id.content_frame);
+        FrameLayout contentFrame = findViewById(R.id.page_content);
         contentFrame.removeAllViews();;
         getLayoutInflater().inflate(layoutResID, contentFrame, true);
-        this.currentFrameLayout = layoutResID;
+        this.currentMenuItemId = layoutResID;
     }
 
-    protected void show(boolean show){
+    protected void showPageLayout(boolean show){
         if(show){
             this.loadingOverlay.setVisibility(View.INVISIBLE);
-            this.mainContent.setVisibility(View.VISIBLE);
-            this.headerLayout.setVisibility(View.VISIBLE);
+            this.scrollArea.setVisibility(View.VISIBLE);
+            this.menuView.setVisibility(View.VISIBLE);
         } else{
             this.loadingOverlay.setVisibility(View.VISIBLE);
-            this.mainContent.setVisibility(View.INVISIBLE);
-            this.headerLayout.setVisibility(View.INVISIBLE);
+            this.scrollArea.setVisibility(View.INVISIBLE);
+            this.menuView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -111,7 +112,5 @@ public class BaseActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
-
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Transparent background to make only the top border visible -->
+    <item>
+        <shape>
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+
+    <!-- Top border -->
+    <item android:top="2dp">
+        <shape>
+            <solid android:color="@color/chefmate_main_color" />
+        </shape>
+    </item>
+</layer-list>

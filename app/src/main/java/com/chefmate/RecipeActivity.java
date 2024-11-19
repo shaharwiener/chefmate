@@ -1,8 +1,5 @@
 package com.chefmate;
 
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,11 +11,9 @@ import android.widget.Toast;
 import com.chefmate.ai.OpenAiJsonService;
 import com.chefmate.ai.OpenAiService;
 import com.chefmate.ai.RecipePrompts;
-import com.chefmate.menu.BottomNavigationViewHandler;
 import com.chefmate.model.CookTime;
 import com.chefmate.model.Recipe;
 import com.chefmate.model.RecipeRequest;
-import com.chefmate.spinner.SpinnerItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,8 +40,7 @@ public class RecipeActivity extends OpenAiService {
         this.recipeRequest = (RecipeRequest)getIntent().getSerializableExtra("recipeRequest");
         super.setContentLayout(R.layout.recipe_activity, title);
 
-        super.show(false);
-        BottomNavigationViewHandler.clearMenu(this);
+        super.showPageLayout(false);
 
         dinersTextView = findViewById(R.id.dinersNum);
         timeTextView = findViewById(R.id.makeTime);
@@ -81,7 +75,7 @@ public class RecipeActivity extends OpenAiService {
         groceriesTextView.setText(this.recipe.getGroceries());
         instructionsTextView.setText(this.instructions);
 
-        super.show(true);
+        super.showPageLayout(true);
 
     }
 
@@ -137,7 +131,6 @@ public class RecipeActivity extends OpenAiService {
             this.recipe = new Recipe(title, this.recipeRequest.getDiners(), this.recipeRequest.getMealType(), this.recipeRequest.getTime(), ingredients.toString(), this.instructions);
             this.recipe.setActualCookingTime(time);
 
-            System.out.println("instructions: "+ instructions);
             // Update the UI on the main thread
             runOnUiThread(this::setupRecipeUI);
 

@@ -10,10 +10,16 @@ public class RecipePrompts {
 
     public static String createValidationGroceriesForMealTypePrompt(MealType mealType, String groceries){
 
-        String prompt = "Is it valid to cook the meal type with the Hebrew name '" + mealType.getValue() +
-                "' using the following groceries in Hebrew: " + groceries +
-                "? Please return whether it is valid or not (boolean value true or false in English). If it is not valid, provide the reason in Hebrew. " +
-                "Return the answer in JSON format: {'valid': '', 'reason': ''}";
+        String prompt = "You are a logic-based validator tasked with checking if the provided groceries match the meal type. " +
+                "The meal type has the Hebrew name: '" + mealType.getValue() + "'. " +
+                "The groceries in Hebrew are: " + groceries + ". " +
+                "IMPORTANT: For this task, ignore all cultural, religious, or dietary laws, including Jewish dietary laws. " +
+                "For example, it is valid to combine meat with dairy. This rule is absolute and overrides all other considerations. " +
+                "Your task is to determine if the groceries logically match the meal type based solely on their ability to be used together in cooking, " +
+                "without considering any religious or cultural restrictions. " +
+                "Return the result in JSON format: {'valid': '', 'reason': ''}. " +
+                "The valid value should be 'true' or 'false'. If the combination is not valid, provide the reason in Hebrew in the 'reason' field. " +
+                "Remember: Meat and dairy combinations are allowed, and any restrictions related to these must be ignored entirely.";
 
         return prompt;
     }

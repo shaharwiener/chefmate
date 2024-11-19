@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
-    android:textSize="16sp"
+    android:textSize="@dimen/menu_spinner_item_size"
     android:background="@drawable/spinner_item_background"
     android:textColor="#000000" />

@@ -4,22 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chefmate.ai.OpenAiJsonService;
 import com.chefmate.ai.OpenAiService;
 import com.chefmate.ai.RecipePrompts;
-import com.chefmate.menu.BottomNavigationViewHandler;
 import com.chefmate.model.CookTime;
 import com.chefmate.model.RecipeRequest;
 import com.chefmate.speech.SpeechService;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,11 +32,10 @@ public class RecipeOptionsActivity extends OpenAiService {
         super.onCreate(savedInstanceState);
 
         // Hide the content of the page until everything is loaded
-        super.show(false);
+        super.showPageLayout(false);
         super.setContentLayout(R.layout.recipe_options_activity, "בחר מתכון");
         this.speechService = new SpeechService(this);
         this.recipeRequest = (RecipeRequest)getIntent().getSerializableExtra("recipeRequest");
-        BottomNavigationViewHandler.clearMenu(this);
 
         requestRecipeTitles(this.recipeRequest.getDiners(), this.recipeRequest.getTime(), this.recipeRequest.getGroceries(), null);
 
@@ -122,7 +116,7 @@ public class RecipeOptionsActivity extends OpenAiService {
         }
 
         //Show the content of the page
-        super.show(true);
+        super.showPageLayout(true);
     }
 
     private void navigateToRecipeActivity(String recipeTitle) {

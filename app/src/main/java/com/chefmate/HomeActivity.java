@@ -2,18 +2,14 @@ package com.chefmate;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chefmate.ai.OpenAiJsonService;
 import com.chefmate.ai.OpenAiService;
@@ -57,21 +53,12 @@ public class HomeActivity extends OpenAiService {
         Button findRecipes = findViewById(R.id.findRecipesButton);
         findRecipes.setOnClickListener(v -> navigateToRecipeOptions());
 
-        ImageView infoImage = findViewById(R.id.infoImage);
-        infoImage.setOnClickListener(v -> navigateToInfo());
-
         Spinner spinner = findViewById(R.id.typeInput);
         MealTypeSpinnerHandler.handle(spinner, this);
 
         spinner = findViewById(R.id.cookTimeInput);
         CookTimeSpinnerHandler.handle(spinner, this);
-
-        super.show(true);
-    }
-
-    private void navigateToInfo(){
-        Intent intent = new Intent(this, InfoActivity.class);
-        startActivity(intent);
+        super.showPageLayout(true);
     }
 
     private void addGroceryItem(String grocery) {
@@ -98,7 +85,7 @@ public class HomeActivity extends OpenAiService {
         EditText dinersEdit = findViewById(R.id.dinersInput);
         Spinner cookTime = findViewById(R.id.cookTimeInput);
 
-        // Ensure inputs are provided
+        // Ensure inputs are provided TODO: add meal type check
         if (dinersEdit.getText().equals("") || cookTime.getSelectedItem().toString().equals("") || groceryListContainer.getChildCount() == 0) {
             // Handle missing input error (e.g., show a Toast message)
             return;
@@ -112,7 +99,7 @@ public class HomeActivity extends OpenAiService {
         StringBuilder groceries = new StringBuilder();
         for (int i = 0; i < groceryListContainer.getChildCount(); i++) {
             GroceryItemView groceryItem = (GroceryItemView) groceryListContainer.getChildAt(i);
-            groceries.append(groceryItem.getGroceryText()).append(", ");
+            groceries.append("'").append(groceryItem.getGroceryText()).append("'").append(", ");
         }
         CookTime cooktime = CookTime.valueOf(cookTimeItem.getId());
         MealType mealType = MealType.valueOf(mealTypeItem.getId());
@@ -126,18 +113,18 @@ public class HomeActivity extends OpenAiService {
 
     @Override
     protected void handleOpenAiResponse(String response) throws JSONException {
-        System.out.println("In handleOpenAiResponse");
         String content = OpenAiJsonService.cleanJsonResponse(response, false);
 
         JSONObject jsonContent = new JSONObject(content);
         boolean isValid = jsonContent.getBoolean("valid");
-        System.out.println("is valid: " + isValid);
         if(!isValid){
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        ((TextView) findViewById(R.id.errorMessage)).setText(jsonContent.getString("reason"));
+                        TextView errorMessage = ((TextView) findViewById(R.id.errorMessage));
+                        errorMessage.setText(jsonContent.getString("reason"));
+                        errorMessage.setVisibility(View.VISIBLE);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }

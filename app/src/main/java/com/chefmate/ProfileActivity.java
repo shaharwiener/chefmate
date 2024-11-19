@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,10 +33,11 @@ public class ProfileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.profile_activity, "פרופיל משתמש");
-        show(false);
+        showPageLayout(false);
         profileImage = findViewById(R.id.profileImage);
-        profileImage.setOnClickListener(v -> showImagePickerDialog());
-        show(true);
+        Button  profileImageUploader = findViewById(R.id.profile_image_upload_button);
+        profileImageUploader.setOnClickListener(v -> showImagePickerDialog());
+        showPageLayout(true);
     }
 
     private void showImagePickerDialog() {
