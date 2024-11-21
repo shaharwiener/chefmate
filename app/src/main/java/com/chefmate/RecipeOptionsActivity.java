@@ -18,46 +18,66 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
+/**
+ * RecipeOptionsActivity handles displaying a list of recipe options to the user based on their input.
+ * It interacts with the OpenAI API to fetch recipe titles and provides options for text-to-speech (TTS)
+ * functionality and reloading new recipe suggestions.
+ */
 public class RecipeOptionsActivity extends OpenAiService {
 
-     private RecipeRequest recipeRequest;
-     private SpeechService speechService;
-    private ArrayList<String> recipeOptions;
+    private RecipeRequest recipeRequest; // Stores details of the recipe request
+    private SpeechService speechService; // Handles text-to-speech functionality
+    private ArrayList<String> recipeOptions; // List of recipe titles fetched from OpenAI
+    private boolean isSpeaking = false; // Tracks whether TTS is currently speaking
 
-    private boolean isSpeaking = false; // Flag to track if TTS is speaking
-
-
+    /**
+     * Initializes the activity, sets up the UI components, and triggers the first API call to fetch recipes.
+     *
+     * @param savedInstanceState if the activity is being re-initialized after being shut down,
+     *                           this Bundle contains the most recent data.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Hide the content of the page until everything is loaded
+        // Hide the content until the page is fully loaded
         super.showPageLayout(false);
         super.setContentLayout(R.layout.recipe_options_activity, "בחר מתכון");
-        this.speechService = new SpeechService(this);
-        this.recipeRequest = (RecipeRequest)getIntent().getSerializableExtra("recipeRequest");
 
+        // Initialize the SpeechService for TTS functionality
+        this.speechService = new SpeechService(this);
+
+        // Retrieve the RecipeRequest object from the Intent
+        this.recipeRequest = (RecipeRequest) getIntent().getSerializableExtra("recipeRequest");
+
+        // Fetch recipe titles using OpenAI API
+        assert this.recipeRequest != null;
         requestRecipeTitles(this.recipeRequest.getDiners(), this.recipeRequest.getTime(), this.recipeRequest.getGroceries(), null);
 
-        // Setup the speaker button
+        // Set up the speaker button to toggle TTS
         ImageButton speakerButton = findViewById(R.id.imageButtonSpeaker);
         speakerButton.setOnClickListener(v -> toggleSpeech());
 
-        // Setup the "Load New Options" button
+        // Set up the "Load New Options" button to fetch new recipes
         ImageButton loadNewOptionsButton = findViewById(R.id.newOptions);
         loadNewOptionsButton.setOnClickListener(v -> requestRecipeTitles(this.recipeRequest.getDiners(), this.recipeRequest.getTime(), this.recipeRequest.getGroceries(), this.recipeOptions));
     }
 
+    /**
+     * Handles the response from the OpenAI API. Parses the response to extract recipe titles,
+     * updates the UI with the fetched titles, or logs errors if parsing fails.
+     *
+     * @param response The JSON response from OpenAI.
+     */
+    @Override
     protected void handleOpenAiResponse(String response) {
         try {
             String cleanedJsonArray = OpenAiJsonService.cleanJsonResponse(response, true);
-            // Parse the cleaned JSON array
             JSONArray recipesJsonArray = new JSONArray(cleanedJsonArray);
+
             recipeOptions = new ArrayList<>();
-            // Extract each title from the JSON array and add to recipes list
             for (int i = 0; i < recipesJsonArray.length(); i++) {
-                String title = recipesJsonArray.getString(i);
-                recipeOptions.add(title);
+                recipeOptions.add(recipesJsonArray.getString(i));
             }
 
             // Update the UI on the main thread
@@ -69,30 +89,46 @@ public class RecipeOptionsActivity extends OpenAiService {
         }
     }
 
+    /**
+     * Sends a request to OpenAI to fetch recipe titles based on the user's input.
+     *
+     * @param diners    Number of diners specified by the user.
+     * @param time      Cooking time selected by the user.
+     * @param groceries List of grocery items provided by the user.
+     * @param options   Previously fetched recipe titles (optional).
+     */
     private void requestRecipeTitles(int diners, CookTime time, String groceries, ArrayList<String> options) {
         String prompt = RecipePrompts.createGetRecipeOptionsPrompt(diners, time, groceries, options);
         callOpenAI(prompt);
     }
 
-    // Method to toggle TTS speech
+    /**
+     * Toggles the text-to-speech (TTS) functionality. If TTS is currently active, it stops.
+     * Otherwise, it starts speaking the recipe options.
+     */
     private void toggleSpeech() {
         if (isSpeaking) {
-            // If already speaking, stop the TTS
             this.speechService.stop();
             isSpeaking = false;
         } else {
-            // If not speaking, start speaking the recipe options
             this.speechService.speak(recipeOptions);
             isSpeaking = true;
         }
     }
 
+    /**
+     * Cleans up resources used by the SpeechService when the activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
-       this.speechService.destroy();
+        this.speechService.destroy();
         super.onDestroy();
     }
 
+    /**
+     * Sets up the UI to display the fetched recipe options and attach click listeners to navigate
+     * to the detailed recipe view.
+     */
     private void setupRecipeOptionsUI() {
 
         TextView title1 = findViewById(R.id.title1);
@@ -100,31 +136,32 @@ public class RecipeOptionsActivity extends OpenAiService {
         TextView title3 = findViewById(R.id.title3);
         TextView title4 = findViewById(R.id.title4);
 
-        // Set button text with recipes, handle cases with fewer than 4 recipes
         if (recipeOptions != null && recipeOptions.size() >= 4) {
             title1.setText(recipeOptions.get(0));
             title2.setText(recipeOptions.get(1));
             title3.setText(recipeOptions.get(2));
             title4.setText(recipeOptions.get(3));
 
-//             Set click listeners to fetch full recipe details
+            // Attach click listeners to navigate to detailed recipe activity
             title1.setOnClickListener(v -> navigateToRecipeActivity(recipeOptions.get(0)));
             title2.setOnClickListener(v -> navigateToRecipeActivity(recipeOptions.get(1)));
             title3.setOnClickListener(v -> navigateToRecipeActivity(recipeOptions.get(2)));
             title4.setOnClickListener(v -> navigateToRecipeActivity(recipeOptions.get(3)));
-
         }
 
-        //Show the content of the page
+        // Show the content of the page
         super.showPageLayout(true);
     }
 
+    /**
+     * Navigates to the RecipeActivity to display details for the selected recipe.
+     *
+     * @param recipeTitle The title of the recipe selected by the user.
+     */
     private void navigateToRecipeActivity(String recipeTitle) {
         Intent intent = new Intent(this, RecipeActivity.class);
         intent.putExtra("title", recipeTitle);
         intent.putExtra("recipeRequest", this.recipeRequest);
         startActivity(intent);
     }
-
-
 }

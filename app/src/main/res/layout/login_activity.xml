@@ -8,110 +8,93 @@
     tools:layout_editor_absoluteX="-4dp"
     tools:layout_editor_absoluteY="117dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/chefmate_main_color">
 
-    <EditText
-        android:id="@+id/editTextCode"
-        android:layout_width="260dp"
-        android:layout_height="61dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:fontFamily="@font/comic_medium"
-        android:hint="קוד אימות"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        <ImageView
+            android:id="@+id/chefmateImage"
+            android:layout_width="264dp"
+            android:layout_height="215dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:srcCompat="@drawable/loading_logo_image"
+            android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:id="@+id/confirm1"
-        android:layout_width="307dp"
-        android:layout_height="38dp"
-        android:fontFamily="@font/comic_bold"
-        android:text="הכנס מספר טלפון לאימות"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.586"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.391" />
+        <TextView
+            android:id="@+id/phoneTitle"
+            android:layout_width="307dp"
+            android:layout_height="38dp"
+            android:fontFamily="@font/comic_bold"
+            android:text="הכנס מספר טלפון לאימות"
+            android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="260dp"
-        android:layout_height="61dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:fontFamily="@font/comic_medium"
-        android:hint="מספר טלפון"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.479" />
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="260dp"
+            android:layout_height="48dp"
+            android:background="@drawable/border"
+            android:fontFamily="@font/comic_medium"
+            android:hint="מספר טלפון"
+            android:inputType="number"
+            android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#004C69"
-        android:fontFamily="@font/comic_medium"
-        android:text="אישור"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573" />
+        <Button
+            android:id="@+id/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#004C69"
+            android:fontFamily="@font/comic_medium"
+            android:text="הירשם"
+            android:textColor="@android:color/background_light" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="208dp"
-        android:layout_height="36dp"
-        android:fontFamily="@font/comic_bold"
-        android:text="הכנס קוד אימות"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683" />
+        <LinearLayout
+            android:id="@+id/codeView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="30dp">
 
-    <Button
-        android:id="@+id/confirm2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#004C69"
-        android:fontFamily="@font/comic_medium"
-        android:text="אישור"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
+            <TextView
+                android:id="@+id/codeError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comic_bold"
+                android:text="Here will be the error message"
+                android:textSize="15dp"
+                android:textColor="#FF0000"
+                android:textAlignment="center" />
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="264dp"
-        android:layout_height="215dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.048"
-        app:srcCompat="@drawable/loading_logo_image" />
+            <TextView
+                android:id="@+id/codeTitle"
+                android:layout_width="208dp"
+                android:layout_height="36dp"
+                android:fontFamily="@font/comic_bold"
+                android:text="הכנס קוד אימות"
+                android:textSize="30sp" />
+            <EditText
+                android:id="@+id/codeInput"
+                android:layout_width="260dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:fontFamily="@font/comic_medium"
+                android:hint="קוד אימות"
+                android:inputType="number"
+                android:textAlignment="center" />
 
+            <Button
+                android:id="@+id/codeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#004C69"
+                android:fontFamily="@font/comic_medium"
+                android:text="אישור"
+                android:textColor="@android:color/background_light" />
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
